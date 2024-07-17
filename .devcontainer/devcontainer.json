@@ -1,0 +1,18 @@
+{
+    "name": "React - devenv",
+    "dockerComposeFile": "compose.yml",
+    "service": "react-dev-env",
+    "workspaceFolder": "/webapp",
+    "remoteUser": "node",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "dbaeumer.vscode-eslint",
+                "esbenp.prettier-vscode",
+                "formulahendry.auto-rename-tag",
+                "wix.vscode-import-cost",
+                "oderwat.indent-rainbow"
+            ]
+        }
+    }
+}

@@ -1,0 +1,7 @@
+services:
+  react-dev-env:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../:/webapp:cached
