@@ -1,15 +1,17 @@
-import Menu from "./Menu";
-import Logo from "./Logo";
-import BotaoTogglerMenu from "./BotaoTogglerMenu";
-import BotaoCarrinho from "./BotaoCarrinho";
-import CampoTexto from "@/components/CampoTexto";
 import Botao from "@/components/Botao";
+import CampoTexto from "@/components/CampoTexto";
+import BotaoCarrinho from "./BotaoCarrinho";
+import BotaoTogglerMenu from "./BotaoTogglerMenu";
+import Logo from "./Logo";
+import Menu from "./Menu";
 
+import { useCarrinhoContext } from "@/hooks/useCarrinhoContext";
 import { useLocation } from "react-router-dom";
 
-const BarraNavegacao = ({ quantidadeProdutos }) => {
+const BarraNavegacao = () => {
   const location = useLocation();
   const ehAPaginaCarrinho = location.pathname === "/carrinho";
+  const quantidadeProdutos = useCarrinhoContext().quantidade;
   return (
     <header>
       <nav className="navbar navbar-expand-md bg-black navbar-dark">
