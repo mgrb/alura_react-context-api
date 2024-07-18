@@ -6,7 +6,7 @@ import InfoItemCarrinho from "./InfoItemCarrinho";
 import { useCarrinhoContext } from "@/hooks/useCarrinhoContext";
 
 const ItemCarrinho = ({ itemCarrinho }) => {
-  const { removerProdutoCarrinho, adicionarProduto, removerProduto } =
+  const { adicionarProduto, removerProduto, removerProdutoCarrinho } =
     useCarrinhoContext();
   return (
     <li key={itemCarrinho.id}>

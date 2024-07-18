@@ -1,31 +1,31 @@
-import { carrinhoReducer } from "@/reducers/carrinhoReducer";
-import { useEffect } from "react";
-import { useMemo } from "react";
-import { useReducer } from "react";
-import { createContext, useState } from "react";
-
-const carrinhoInitState = [];
+import { createContext, useEffect, useMemo, useReducer, useState } from "react";
+import { carrinhoReducer } from "../reducers/carrinhoReducer";
 
 export const CarrinhoContext = createContext();
 CarrinhoContext.displayName = "Carrinho";
 
+const estadoInicial = [];
+
 export const CarrinhoProvider = ({ children }) => {
-  const [carrinho, dispatch] = useReducer(carrinhoReducer, carrinhoInitState);
+  const [carrinho, dispatch] = useReducer(carrinhoReducer, estadoInicial);
   const [quantidade, setQuantidade] = useState(0);
   const [valorTotal, setValorTotal] = useState(0);
 
-  const { totalTemp, qtdTemp } = useMemo(() => {
+  const { totalTemp, quantidadeTemp } = useMemo(() => {
     return carrinho.reduce(
       (acumulador, produto) => ({
-        qtdTemp: acumulador.qtdTemp + produto.quantidade,
+        quantidadeTemp: acumulador.quantidadeTemp + produto.quantidade,
         totalTemp: acumulador.totalTemp + produto.preco * produto.quantidade,
       }),
-      { totalTemp: 0, qtdTemp: 0 }
+      {
+        quantidadeTemp: 0,
+        totalTemp: 0,
+      }
     );
   }, [carrinho]);
 
   useEffect(() => {
-    setQuantidade(qtdTemp);
+    setQuantidade(quantidadeTemp);
     setValorTotal(totalTemp);
   });
 

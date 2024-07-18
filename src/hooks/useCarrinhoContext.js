@@ -1,12 +1,11 @@
+import { useContext, useMemo } from "react";
 import { CarrinhoContext } from "@/context/CarrinhoContext";
-import { useMemo } from "react";
 import { useEffect } from "react";
-import { useContext } from "react";
 import {
   ADD_PRODUTO,
   REMOVE_PRODUTO,
   UPDATE_QUANTIDADE,
-} from "@/reducers/carrinhoReducer";
+} from "../reducers/carrinhoReducer";
 
 const addProdutoAction = (novoProduto) => ({
   type: ADD_PRODUTO,
@@ -32,7 +31,8 @@ export const useCarrinhoContext = () => {
   }
 
   function removerProduto(id) {
-    const produto = carrinho.find((itemDoCarrinho) => itemDoCarrinho.id === id);
+    const produto = carrinho.find((item) => item.id === id);
+
     if (produto && produto.quantidade > 1) {
       dispatch(updateQuantidadeAction(id, produto.quantidade - 1));
     } else {

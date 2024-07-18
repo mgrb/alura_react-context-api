@@ -6,26 +6,25 @@ export const carrinhoReducer = (state, action) => {
   switch (action.type) {
     case ADD_PRODUTO:
       const novoProduto = action.payload;
-      const produto = state.find((p) => p.id === novoProduto.id);
+      const produto = state.findIndex((item) => item.id === novoProduto.id);
       if (produto === -1) {
         novoProduto.quantidade = 1;
         return [...state, novoProduto];
       } else {
-        return state.map((intem, index) =>
+        return state.map((item, index) =>
           index === produto
-            ? { ...intem, quantidade: intem.quantidade + 1 }
-            : intem
+            ? { ...item, quantidade: item.quantidade + 1 }
+            : item
         );
       }
-
     case REMOVE_PRODUTO:
-      return state.filter((produto) => produto.id !== action.payload);
+      const produtoId = action.payload;
+      return state.filter((item) => item.id !== produtoId);
 
     case UPDATE_QUANTIDADE:
+      const { produtoId: id, quantidade } = action.payload;
       return state.map((item) =>
-        item.id === action.payload.produtoId
-          ? { ...item, quantidade: action.payload.quantidade }
-          : item
+        item.id === id ? { ...item, quantidade } : item
       );
 
     default:
